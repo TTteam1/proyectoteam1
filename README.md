@@ -20,5 +20,9 @@ En la siguiente imagen se muestra el diseño de la arquitectura a partir de los 
 - AWS Calculator
 
 ## Ejecucion
+Ejemplo de codigo
+```
+codigo
+```
 
 ## Seguimiento y Control
