@@ -2,7 +2,13 @@
 
 Manuel Enrique Caita				
 Danny Alexander Riano Gomez				
-luis felipe chacon				
+Luis Felipe Chacon				
 Carlos Alberto González Cardozo				
 
 Despliegue de una arquitectura en AWS altamente disponible y escalable
+
+## Planificacion
+
+## Ejecucion
+
+## Seguimiento y Control
