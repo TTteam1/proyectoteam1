@@ -8,12 +8,13 @@
 Despliegue de una arquitectura en AWS altamente disponible y escalable
 
 ## Planificacion
-* Identificación de requerimientos.
+### Identificación de requerimientos.
 
-* Diagrama de arquitectura.
-* Identificar Roles.
-* Diagrama de Gantt.
-* Determinar presupuesto de acuerdo con los servicios AWS usados.
+### Diagrama de arquitectura.
+  
+### Identificar Roles.
+### Diagrama de Gantt.
+### Determinar presupuesto de acuerdo con los servicios AWS usados.
 - AWS Calculator
 
 ## Ejecucion
