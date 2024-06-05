@@ -12,7 +12,7 @@ Despliegue de una arquitectura en AWS altamente disponible y escalable
 
 ### Diagrama de arquitectura.
 En la siguiente imagen se muestra el diseño de la arquitectura a partir de los requerimientos.
-![arquitectura](img/Arquitectura.pmg)
+![arquitectura](img/Arquitectura.png)
   
 ### Identificar Roles.
 ### Diagrama de Gantt.
