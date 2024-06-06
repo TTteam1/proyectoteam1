@@ -9,7 +9,7 @@ Despliegue de una arquitectura en AWS altamente disponible y escalable
 
 ## Planificacion
 
-* AWS infrastructure High Availability and High Scaling
+#### AWS infrastructure High Availability and High Scaling
 * Internet Gateway
 * Nat Gateway
 * Elastic IP
