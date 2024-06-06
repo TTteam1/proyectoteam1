@@ -8,6 +8,22 @@
 Despliegue de una arquitectura en AWS altamente disponible y escalable
 
 ## Planificacion
+
+* Create the SG for instance
+* Create the SG for instance in subnet private
+* Create the SG for ALB
+* Create the SG for DB
+* Create the instance
+* Create a launch Template
+* Create the Application Load Balancer
+* Create the target group
+* Create a listener for ALB
+* Create the Auto Scaling group
+* Create the Scaling policy
+* Create the databases
+* Create the subnets
+
+
 ### Identificación de requerimientos.
 
 ### Diagrama de arquitectura.
