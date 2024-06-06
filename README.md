@@ -23,6 +23,15 @@ Despliegue de una arquitectura en AWS altamente disponible y escalable
 * Create the databases
 * Create the subnets
 
+* AWS infrastructure High Availability and High Scaling
+* Internet Gateway
+* Nat Gateway
+* Elastic IP
+* Route tables for NatGateway
+* Route for the two Natgateway
+* Associate the route tables to subnets
+
+
 
 ### Identificación de requerimientos.
 
