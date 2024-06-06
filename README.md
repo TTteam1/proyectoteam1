@@ -11,11 +11,13 @@ Despliegue de una arquitectura en AWS altamente disponible y escalable
 
 ### Identificación de requerimientos.
 
+#### Requerimientos de Usuario
 La librería El mundo de las Letras es una librería física ubicada en Medellín con más de 20 años, reconocida en la región por su amplia selección de libros en diferentes  géneros y temas. Ha servido como lugar de encuentro para amantes de la lectura y  estudiantes de bachillerato y universitarios donde además de disfrutar de la lectura  o la experiencia de compra de libros, pueden probar los deliciosos postres que se  ofrecen.  
 El Mundo de las letras con gran experiencia en ventas y asesoría de libros reconociendo el cambio en los hábitos de compra de los consumidores hacia el  comercio electrónico, ha decidido expandir su presencia en línea para llegar a un  público más amplio y mantener su relevancia en un mercado en constante evolución no solo nacional sino también internacional.  
 Para respaldar esa plataforma en línea debe implementar la infraestructura en la  nube de AWS para ofrecer un rendimiento óptimo y una seguridad incomparable.  
 La infraestructura debe contar con lo siguiente:  
 • Desarrollar la plataforma web que permita a los clientes explorar los  diferentes libros.  
+• Una arquitectura resiliente, altamente escalable, disponible y segura 
 • Implementar la red en la nube de AWS con 3 subredes: una pública y dos  privadas.  
 • La subred pública actuará como la puerta de entrada a la plataforma en línea,  brindando a los usuarios acceso a internet y una experiencia de navegación  fluida. En esta subred configurará la instancia AWS EC2.  
 • Las subredes privadas estarán protegidas contra accesos no autorizados desde internet garantizando la seguridad de los datos sensibles de la librería. En una de estas subredes se aprovisionará la base de datos RDS.  
@@ -31,7 +33,7 @@ o El tercer usuario tendrá permisos de auditoría sobre la base de datos  RDS, 
 o El cuarto usuario será responsable de la auditoría de la instancia EC2  y tendrá permisos de solo lectura, protegiendo así la seguridad de la  plataforma web.  
 
 
-
+#### Requerimientos AWS
 * 1 VPC
 * 6 subnets:
   - According to the design we will need two public subnets and four private subnets
