@@ -75,7 +75,7 @@ lo tanto tendrá los siguientes permisos:
 funciones de lectura para garantizar la integridad de los datos.
   -   El cuarto usuario será responsable de la auditoría de la instancia EC2 y tendrá permisos
 de solo lectura, protegiendo así la seguridad de la plataforma web.
-* Arquitectura resiliente, altamente escalable, disponible y segura.
+* Arquitectura resiliente, altamente escalable, disponible y segura.  
 * Implementar la siguiente infraestructura de red:
 
   - 2 zonas de disponibilidad.
@@ -84,13 +84,13 @@ de solo lectura, protegiendo así la seguridad de la plataforma web.
   - Debe configurar un Subnet Group con las dos subredes privadas.
     (Verificar que cada subred esté en una zona de disponibilidad diferente).
 
-* En una de las subredes pública implementar un Bastión Host (Instancia EC2) que sirva para
+  - En una de las subredes pública implementar un Bastión Host (Instancia EC2) que sirva para
 acceder a las instancias en las subredes privadas. En este Bastión Host se configurará el servidor
 web que será lanzado en las instancias en las dos subredes privadas.
-* Configurar el servicio RDS en las otras dos subredes privadas.
-* Configurar el servicio de Auto Scaling Group.
-* Configurar el Load Balancing.
-* Realizar una prueba de estrés para verificar el funcionamiento del Auto Scaling Group.
+  - Configurar el servicio RDS en las otras dos subredes privadas.
+  - Configurar el servicio de Auto Scaling Group.
+  - Configurar el Load Balancing.
+  - Realizar una prueba de estrés para verificar el funcionamiento del Auto Scaling Group.
 
 #### Requerimientos AWS
 * 1 VPC
