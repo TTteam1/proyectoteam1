@@ -12,8 +12,12 @@ Despliegue de una arquitectura en AWS altamente disponible y escalable
 #### AWS infrastructure High Availability and High Scaling
 * Create a VPC
 * Create subnets:
-  - According to the desing we will need two public subnets and four private subnets
-* Internet Gateway
+  - According to the design we will need two public subnets and four private subnets
+* Create Internet Gateway
+  - Attach the Internet Gateway to VPC
+  - Create the Route Table and attach it to Internet Gateway
+  - Create a route for each public subnet and attach it
+
 * Nat Gateway
 * Elastic IP
 * Route tables for NatGateway
