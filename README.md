@@ -77,20 +77,26 @@ funciones de lectura para garantizar la integridad de los datos.
 de solo lectura, protegiendo así la seguridad de la plataforma web.
 * Arquitectura resiliente, altamente escalable, disponible y segura.  
 * Implementar la siguiente infraestructura de red:
-
+  - 1 VPC
   - 2 zonas de disponibilidad.
+  - 1 Internet Gateway
   - 2 subredes publica en cada zona de disponibilidad.
   - 4 subredes privadas, 2 en cada zona de disponibilidad.
-  - Debe configurar un Subnet Group con las dos subredes privadas.
+  - 3 EC2 Instances
+  - 2 Elastic IPs
+  - 2 NatGateways
+  - 1 S3 bucket
+  - Debe configurar un Subnet Group con las dos subredes privadas.  
     (Verificar que cada subred esté en una zona de disponibilidad diferente).
+  - 1 Relational Database Service (RDS)
 
   - En una de las subredes pública implementar un Bastión Host (Instancia EC2) que sirva para
 acceder a las instancias en las subredes privadas. En este Bastión Host se configurará el servidor
 web que será lanzado en las instancias en las dos subredes privadas.
   - Configurar el servicio RDS en las otras dos subredes privadas.
-  - Configurar el servicio de Auto Scaling Group.
-  - Configurar el Load Balancing.
-  - Realizar una prueba de estrés para verificar el funcionamiento del Auto Scaling Group.
+* Configurar el servicio de Auto Scaling Group.
+* Configurar el Load Balancing.
+* Realizar una prueba de estrés para verificar el funcionamiento del Auto Scaling Group.
 
 #### Requerimientos AWS
 * 1 VPC
