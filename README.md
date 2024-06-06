@@ -51,23 +51,23 @@ satisfacer la demanda creciente y mantener la experiencia positiva de los client
 ### Requerimientos Funcionales:
 
 La infraestructura a implementar debe contar con lo siguiente:
-• Desarrollar la plataforma web que permita a los clientes explorar los diferentes libros.
-• Implementar la red en la nube de AWS.
-• La subred pública actuará como la puerta de entrada a la plataforma en línea, brindando a los
+* Desarrollar la plataforma web que permita a los clientes explorar los diferentes libros.
+* Implementar la red en la nube de AWS.
+* La subred pública actuará como la puerta de entrada a la plataforma en línea, brindando a los
 usuarios acceso a internet y una experiencia de navegación fluida.
-• Las subredes privadas estarán protegidas contra accesos no autorizados desde internet
+* Las subredes privadas estarán protegidas contra accesos no autorizados desde internet
 garantizando la seguridad de los datos sensibles de la librería.
 En una de estas subredes se aprovisionará la base de datos RDS.
-• La instancia EC2 debe poder conectarse a la base de datos en la subred
+* La instancia EC2 debe poder conectarse a la base de datos en la subred
 privada.
-• Para mantener un nivel óptimo de seguridad, se crearán usuarios IAM
+* Para mantener un nivel óptimo de seguridad, se crearán usuarios IAM
 con roles específicos:
-o El primer usuario es el administrador del servidor web por lo tanto
+  - El primer usuario es el administrador del servidor web por lo tanto
 tendrá los siguientes permisos:
-▪ EC2 Full Access
-▪ SSM Full Access
-▪ EC2InstanceConnect
-o El segundo usuario es el administrador de las bases de datos RDS por
+    - EC2 Full Access
+    - SSM Full Access
+    - EC2InstanceConnect
+  - El segundo usuario es el administrador de las bases de datos RDS por
 lo tanto tendrá los siguientes permisos:
 
 ▪ RDS Full Access
