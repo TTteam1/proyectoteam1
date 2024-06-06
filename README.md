@@ -70,10 +70,10 @@ tendrá los siguientes permisos:
   - El segundo usuario es el administrador de las bases de datos RDS por
 lo tanto tendrá los siguientes permisos:
 
-* RDS Full Access
-* El tercer usuario tendrá permisos de auditoría sobre la base de datos RDS, limitándose a
+    - RDS Full Access
+  - El tercer usuario tendrá permisos de auditoría sobre la base de datos RDS, limitándose a
 funciones de lectura para garantizar la integridad de los datos.
-* El cuarto usuario será responsable de la auditoría de la instancia EC2 y tendrá permisos
+  -   El cuarto usuario será responsable de la auditoría de la instancia EC2 y tendrá permisos
 de solo lectura, protegiendo así la seguridad de la plataforma web.
 * Arquitectura resiliente, altamente escalable, disponible y segura.
 * Implementar la siguiente infraestructura de red:
