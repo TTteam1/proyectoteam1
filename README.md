@@ -22,18 +22,26 @@ Despliegue de una arquitectura en AWS altamente disponible y escalable
 * 1 Relational Database Service (RDS)
 * 2 Elastic IPs
 * 2 NatGateways
+* 1 S3 bucket
   
-
-
-
-### Identificación de requerimientos.
 
 ### Diagrama de arquitectura.
 En la siguiente imagen se muestra el diseño de la arquitectura a partir de los requerimientos.
 ![arquitectura](img/Arquitectura.png)
   
 ### Identificar Roles.
+* Admin
+* Data Base administrator
+* Developers
+* EC2 instances administrator
+* EC2 instances support
+* Data Base audit
+* EC2 instances audit
+* S3 support
+
 ### Diagrama de Gantt.
+-Imagen
+
 ### Determinar presupuesto de acuerdo con los servicios AWS usados.
 _AWS Calculator
 
