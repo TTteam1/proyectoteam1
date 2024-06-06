@@ -48,7 +48,7 @@ Se debe prever que el aumento de tráfico puede afectar la experiencia de usuari
 en línea y ha identificado la necesidad de mejorar y escalar la infraestructura tecnológica para
 satisfacer la demanda creciente y mantener la experiencia positiva de los clientes en línea.
 
-### Requerimientos Funcionales:
+#### Requerimientos Funcionales:
 
 La infraestructura a implementar debe contar con lo siguiente:
 * Desarrollar la plataforma web que permita a los clientes explorar los diferentes libros.
