@@ -9,7 +9,10 @@ Despliegue de una arquitectura en AWS altamente disponible y escalable
 
 ## Planificacion
 
+### Identificación de requerimientos.
+
 #### AWS infrastructure High Availability and High Scaling
+##### Network Requirements
 * Create a VPC
 * Create subnets:
   - According to the design we will need two public subnets and four private subnets
@@ -19,14 +22,12 @@ Despliegue de una arquitectura en AWS altamente disponible y escalable
     - Create a route
   - Associate the Public Route Table with both Public Subnets
 * Create a Nat Gateway for both public subnets
+  - Create two Elastic IPs
   - Create Route table for each NatGateways
   - Create a Route for both Natgateways
   - Associate the route tables with subnets
-* Create two Elastic IPs
 
-* Route for the two Natgateway
-* Associate the route tables to subnets
->
+
 * Create the SG for instance
 * Create the SG for instance in subnet private
 * Create the SG for ALB
