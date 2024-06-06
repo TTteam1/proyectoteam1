@@ -18,10 +18,12 @@ Despliegue de una arquitectura en AWS altamente disponible y escalable
   - Create the Route Table
     - Create a route
   - Associate the Public Route Table with both Public Subnets
+* Create a Nat Gateway for both public subnets
+  - Create Route table for each NatGateways
+  - Create a Route for both Natgateways
+  - Associate the route tables with subnets
+* Create two Elastic IPs
 
-* Nat Gateway
-* Elastic IP
-* Route tables for NatGateway
 * Route for the two Natgateway
 * Associate the route tables to subnets
 >
