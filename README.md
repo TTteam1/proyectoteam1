@@ -16,9 +16,31 @@ La librería El mundo de las Letras es una librería física ubicada en Medellí
 El Mundo de las letras con gran experiencia en ventas y asesoría de libros reconociendo el cambio en los hábitos de compra de los consumidores hacia el  comercio electrónico, ha decidido expandir su presencia en línea para llegar a un  público más amplio y mantener su relevancia en un mercado en constante evolución no solo nacional sino también internacional.  
 Para respaldar esa plataforma en línea debe implementar la infraestructura en la  nube de AWS para ofrecer un rendimiento óptimo y una seguridad incomparable.  
 La infraestructura debe contar con lo siguiente:  
-• Desarrollar la plataforma web que permita a los clientes explorar los  diferentes libros.  
-• Una arquitectura resiliente, altamente escalable, disponible y segura 
-• Implementar la red en la nube de AWS con 3 subredes: una pública y dos  privadas.  
+• Una plataforma web que permita a los clientes explorar los  diferentes libros.  
+• Una arquitectura resiliente, altamente escalable, disponible y segura   
+
+--------------
+Diseñe una arquitectura resiliente, altamente escalable, disponible y segura
+utilizando el software Lucidchart.
+• Implementar la siguiente infraestructura de red:
+o 2 zonas de disponibilidad.
+o 2 subredes publica en cada zona de disponibilidad.
+o 4 subredes privadas, 2 en cada zona de disponibilidad.
+• En una de las subredes pública implementar un Bastión Host (Instancia EC2)
+que sirva para acceder a las instancias en las subredes privadas. En este
+Bastión Host se configurará el servidor web que será lanzado en las
+instancias en las dos subredes privadas.
+• Configurar el servicio RDS en las otras dos subredes privadas.
+o Debe configurar un Subnet Group con las dos subredes privadas.
+(Verificar que cada subred esté en una zona de disponibilidad
+diferente).
+
+• Configurar el servicio de Auto Scaling Group.
+• Configurar el Load Balancing.
+
+-----------
+
+• Implementar la red en la nube de AWS con 6 subredes: dos públicas y cuatro privadas.  
 • La subred pública actuará como la puerta de entrada a la plataforma en línea,  brindando a los usuarios acceso a internet y una experiencia de navegación  fluida. En esta subred configurará la instancia AWS EC2.  
 • Las subredes privadas estarán protegidas contra accesos no autorizados desde internet garantizando la seguridad de los datos sensibles de la librería. En una de estas subredes se aprovisionará la base de datos RDS.  
 • La instancia EC2 debe poder conectarse a la base de datos en la subred  privada. Para facilitar esta conexión se implementarán parámetros de  conexión de la base de datos en el AWS System Manager Parameter Store,  garantizando acceso seguro y eficiente a los datos almacenados.  
