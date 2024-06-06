@@ -56,7 +56,7 @@ En la siguiente imagen se muestra el diseño de la arquitectura a partir de los 
 ### Identificar Roles.
 ### Diagrama de Gantt.
 ### Determinar presupuesto de acuerdo con los servicios AWS usados.
-- AWS Calculator
+_AWS Calculator
 
 ## Ejecucion
 Ejemplo de codigo
