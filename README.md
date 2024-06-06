@@ -16,22 +16,9 @@ Despliegue de una arquitectura en AWS altamente disponible y escalable
 * Route tables for NatGateway
 * Route for the two Natgateway
 * Associate the route tables to subnets
-
-
-
-\n
-\n
-
-
-
 >
 > 
-
-
 >
-
-  
-
 * Create the SG for instance
 * Create the SG for instance in subnet private
 * Create the SG for ALB
