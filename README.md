@@ -15,8 +15,9 @@ Despliegue de una arquitectura en AWS altamente disponible y escalable
   - According to the design we will need two public subnets and four private subnets
 * Create Internet Gateway
   - Attach the Internet Gateway to VPC
-  - Create the Route Table and attach it to Internet Gateway
-  - Create a route for each public subnet and attach it
+  - Create the Route Table
+    - Create a route
+  - Associate the Public Route Table with both Public Subnets
 
 * Nat Gateway
 * Elastic IP
