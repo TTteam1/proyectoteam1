@@ -98,21 +98,6 @@ web que será lanzado en las instancias en las dos subredes privadas.
 * Configurar el Load Balancing.
 * Realizar una prueba de estrés para verificar el funcionamiento del Auto Scaling Group.
 
-#### Requerimientos AWS
-* 1 VPC
-* 6 subnets:
-  - According to the design we will need two public subnets and four private subnets
-* 1 Internet Gateway
-* 2 Availability Zones
-* 1 Application Load Balancer
-* 1 Auto Scaling Group
-* 3 EC2 Instances
-* 1 Relational Database Service (RDS)
-* 2 Elastic IPs
-* 2 NatGateways
-* 1 S3 bucket
-  
-
 ### Diagrama de arquitectura.
 En la siguiente imagen se muestra el diseño de la arquitectura a partir de los requerimientos.
 ![arquitectura](img/Arquitectura.png)
