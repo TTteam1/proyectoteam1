@@ -103,14 +103,10 @@ En la siguiente imagen se muestra el diseño de la arquitectura a partir de los 
 ![arquitectura](img/Arquitectura.png)
   
 ### Identificar Roles.
-* Admin
+* Web administrator
 * Data Base administrator
-* Developers
-* EC2 instances administrator
-* EC2 instances support
-* Data Base audit
-* EC2 instances audit
-* S3 support
+* Relational Database Service (RDS) audit
+* EC2 audit
 
 ### Diagrama de Gantt.
 -Imagen
