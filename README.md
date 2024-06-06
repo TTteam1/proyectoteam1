@@ -22,9 +22,9 @@ La infraestructura debe contar con lo siguiente:
 • La instancia EC2 debe poder conectarse a la base de datos en la subred  privada. Para facilitar esta conexión se implementarán parámetros de  conexión de la base de datos en el AWS System Manager Parameter Store,  garantizando acceso seguro y eficiente a los datos almacenados.  
 • Para mantener un nivel óptimo de seguridad, se crearán cuatro usuarios IAM  con roles específicos: 
 o El primer usuario es el administrador del servidor web por lo tanto  tendrá los siguientes permisos: 
-▪ EC2 Full Access 
-▪ SSM Full Access 
-▪ EC2InstanceConnect 
+▪ EC2 Full Access   
+▪ SSM Full Access    
+▪ EC2InstanceConnect   
 o El segundo usuario es el administrador de las bases de datos RDS por  lo tanto tendrá los siguientes permisos:
 ▪ RDS Full Access 
 o El tercer usuario tendrá permisos de auditoría sobre la base de datos  RDS, limitándose a funciones de lectura para garantizar la integridad  de los datos.  
