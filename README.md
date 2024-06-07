@@ -120,7 +120,7 @@ para la creacion de los recursos que satisfagan los requerimientos y recursos qu
 > [!IMPORTANT]
 > en esta seccion se va a explicar el contenido que los archivos pricipales para configurar nuestra arquitectura dentro de aws.
 <p>Primero tenemos la seccion de parametros.<p>
-En esta seccion vamos a asociar la vpc a una ip
+En esta seccion vamos a asociar la vpc a una ip, esto lo hacemos dentro del bloque de parametros en el yaml.
 
 ```
 AWSTemplateFormatVersion: "2010-09-09"
@@ -134,7 +134,32 @@ Parameters:
     Type: String
     Default: 172.16.0.0/16
 ```
+Vamos a asociar las subnets a las ips y les vamos a asociar un nombre para cada subnet debemos asociar una ip que no se traslapen entre si.
+```
+  PublicSubnetAIP:
+    Type: String
+    Default: 172.16.1.0/24
 
+  PublicSubnetBIP:
+    Type: String
+    Default: 172.16.2.0/24
+  
+  PrivateSubnetAIP:
+    Type: String
+    Default: 172.16.3.0/24
+  
+  PrivateSubnetBIP:
+    Type: String
+    Default: 172.16.4.0/24
+    
+  PrivateSubnetAAIP:
+    Type: String
+    Default: 172.16.5.0/24
+    
+  PrivateSubnetBBIP:
+    Type: String
+    Default: 172.16.6.0/24
+```
 * Documento la implementación a través de capas usando el servicio AWS Cloudformation y AWS Pipeline.
 * Describir cada uno de los componentes usados durante la implementación.
 * Argumentar de acuerdo con el AWS Well-Architect Framework.
