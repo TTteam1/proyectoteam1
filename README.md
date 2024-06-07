@@ -115,6 +115,23 @@ En la siguiente imagen se muestra el diseño de la arquitectura a partir de los 
 _AWS Calculator
 
 ## Ejecucion
+para la creacion de los recursos que satisfagan los requerimientos y recursos que nos hemos plantado lo vamos a divirdir en dos archivos, el primer archivo lo vamos a confgurar con la parametrizaciones de red, como lo es la vpc, las subredes, internet gateway, nat gateway,  routebles y routes, lo llamaremos como network.yaml
+
+> [!IMPORTANT]
+Primero tenemos la seccion de parametros
+En esta seccion vamos a asociar la vpc a una ip
+```
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description:
+  This template deploys the architecture with one VPC, two public subnets and two private subnets
+
+Parameters:
+ 
+  VpcCIDR:
+    Type: String
+    Default: 172.16.0.0/16
+```
 
 * Documento la implementación a través de capas usando el servicio AWS Cloudformation y AWS Pipeline.
 * Describir cada uno de los componentes usados durante la implementación.
