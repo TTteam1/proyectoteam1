@@ -112,7 +112,7 @@ En la siguiente imagen se muestra el diseño de la arquitectura a partir de los 
 -Imagen
 
 ### Determinar presupuesto de acuerdo con los servicios AWS usados.
-[aws_calculator](img/estimation.PNG)
+![aws_calculator](img/estimation.PNG)
 
 ## Ejecucion
 para la creacion de los recursos que satisfagan los requerimientos y recursos que nos hemos plantado lo vamos a divirdir en dos archivos, el primer archivo lo vamos a confgurar con la parametrizaciones de red, como lo es la vpc, las subredes, internet gateway, nat gateway,  routebles y routes, lo llamaremos como network.yaml
