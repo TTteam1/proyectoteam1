@@ -117,7 +117,8 @@ _AWS Calculator
 ## Ejecucion
 para la creacion de los recursos que satisfagan los requerimientos y recursos que nos hemos plantado lo vamos a divirdir en dos archivos, el primer archivo lo vamos a confgurar con la parametrizaciones de red, como lo es la vpc, las subredes, internet gateway, nat gateway,  routebles y routes, lo llamaremos como network.yaml
 
-> [!IMPORTANT] >
+> [!IMPORTANT]
+> en esta seccion se va a explicar el contenido que los archivos pricipales para configurar nuestra arquitectura dentro de aws
 Primero tenemos la seccion de parametros
 En esta seccion vamos a asociar la vpc a una ip
 ```
