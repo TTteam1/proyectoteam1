@@ -175,10 +175,10 @@ Resources:
       EnableDnsHostnames: true
       Tags:  
         - Key: Name
-          Value: VPC-WEB-SERVER-BOOK   #le damos un nombre, este nombre es el que se vera en aws        # se le pasa valores de key y valuepara definir esto.
+          Value: VPC-WEB-SERVER-BOOK 
 ```
 > [!NOTE]
->Se realiza la configuracion para la creacion de las subnets, aqui la asociamos a la vpc que creamos, definimos una zona de disponibilidad, la asociamos a los parametros que teniamos anteriormente cuando definimos los parametros y las ip, esto lo debemos hacer para cada subnet, lo que va a cambiar son los nombres y la zona de disponibilidad
+>Se realiza la configuracion para la creacion de las subnets, aqui la asociamos a la vpc que creamos, definimos una zona de disponibilidad, la asociamos a los parametros que teniamos anteriormente cuando definimos los parametros y las ip, esto lo debemos hacer para cada subnet, lo que va a cambiar son los nombres y la zona de disponibilidad.
 ```
   PublicSubnetA:
     Type: AWS::EC2::Subnet
@@ -203,6 +203,173 @@ Resources:
       Tags:
         - Key: Name
           Value: PublicSubnetB 
+```
+> [!NOTE]
+>Vamos a configurar el internet gateway, en la cual creamos el recurso le damos un nombre y tambien lo vamos ascoiar al internet gateway con la vpc.
+```
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: IG_WSC
+
+  InternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: 
+        Ref: InternetGateway
+      VpcId: 
+        Ref: VPC 
+```
+> [!NOTE]
+>En esta seccion vamos a crear la route table y sera asociada a la vpc que se creo, esta se encargara de redirigir el trafico.
+```
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: 
+        Ref: VPC
+      Tags:
+        - Key: Name
+          Value: Public_Routes
+
+#luego vamos  a crear una route, esta route la tenemos que refenciar  a la route table que creamos, al internet gateway,tambien al attach del internet gateway y la vpc.
+  PublicRouteA:
+    Type: AWS::EC2::Route
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      RouteTableId:
+        Ref: PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: 
+        Ref: InternetGateway          
+```
+
+> [!NOTE]
+>En esta seccion vamos asociar la route table a cada una de las redes publicas que creamos, hacemos relacion a que route table vamos asociar y a que subnet la queremos asociar.
+```
+  PublicSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: 
+        Ref: PublicRouteTable
+      SubnetId: 
+        Ref: PublicSubnetA
+
+  PublicSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: 
+        Ref: PublicRouteTable
+      SubnetId: 
+        Ref: PublicSubnetB
+```
+> [!NOTE]
+>vamos a crear el recurso de la nat gateway, esto nos permitira que nos podamos conectar a intenet, como tenemos dos subredes publicas debemos crear dos nat gateway, cada una la vamos a asociar a un subred y le vamos a asociar un ip elastica, esta asociasion la vamos a realizar por medio del nombre de la ip elastica.
+```
+  NatGatewayA:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt AipELASTIC.AllocationId
+      SubnetId:
+        Ref: PublicSubnetA
+      Tags:
+        - Key: Name
+          Value: NatGatewayA-subnetPublicA
+
+  NatGatewayB:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt BipELASTIC.AllocationId
+      SubnetId:
+        Ref: PublicSubnetB
+      Tags:
+        - Key: Name
+          Value: NatGatewayA-subnetPublicB
+```
+> [!NOTE]
+>en esta seccion vamos a crear la configuracion para las ip elasticas, debemos tener dos ip elasticas estas son apra cada nat gateway y las asociamos a la vpc que creamos
+```
+  ##Elastic IP
+  AipELASTIC:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain:
+        Ref: VPC
+      Tags: 
+        - Key: Name
+          Value: EIP-nwA
+  
+  BipELASTIC:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain:
+        Ref: VPC
+      Tags: 
+        - Key: Name
+          Value: EIP-nwB
+```
+> [!NOTE]
+>En esta seccion vamos a crear 2 route tables asociadas a la vpc y estas las asociaremos a las nat gateway
+```
+  RouteTableNatGatewayA:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: 
+        Ref: VPC
+      Tags:
+        - Key: Name
+          Value: Route-NW-A
+  
+  RouteTableNatGatewayB:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: 
+        Ref: VPC
+      Tags:
+        - Key: Name
+          Value: Route-NW-B
+```
+> [!NOTE]
+>Debemos crear una route para cada una de las route table que creamos, le definimos quien puede conectarse, lo asociamos a cada nat gateway
+```
+  PublicRouteNgA:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: RouteTableNatGatewayA
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: 
+        Ref: NatGatewayA
+
+  PublicRouteNgAB:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: RouteTableNatGatewayB
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: 
+        Ref: NatGatewayB          
+```
+> [!NOTE]
+>Vamos asociar nuestra route table cpn el natgateway y con la subneta la que deseamos asociar
+```
+  NWARouteAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: 
+        Ref: RouteTableNatGatewayA
+      SubnetId: 
+        Ref: PrivateSubnetA
+
+  NWBRouteAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: 
+        Ref: RouteTableNatGatewayB
+      SubnetId: 
+        Ref: PrivateSubnetB
 ```
 
 * Documento la implementación a través de capas usando el servicio AWS Cloudformation y AWS Pipeline.
