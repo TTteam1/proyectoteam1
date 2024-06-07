@@ -266,7 +266,7 @@ Resources:
         Ref: PublicSubnetB
 ```
 > [!NOTE]
->vamos a crear el recurso de la nat gateway, esto nos permitira que nos podamos conectar a intenet, como tenemos dos subredes publicas debemos crear dos nat gateway, cada una la vamos a asociar a un subred y le vamos a asociar un ip elastica, esta asociasion la vamos a realizar por medio del nombre de la ip elastica.
+>Vamos a crear el recurso de la nat gateway, esto nos permitira que nos podamos conectar a intenet, como tenemos dos subredes publicas debemos crear dos nat gateway, cada una la vamos a asociar a un subred y le vamos a asociar un ip elastica, esta asociasion la vamos a realizar por medio del nombre de la ip elastica.
 ```
   NatGatewayA:
     Type: AWS::EC2::NatGateway
@@ -289,7 +289,7 @@ Resources:
           Value: NatGatewayA-subnetPublicB
 ```
 > [!NOTE]
->en esta seccion vamos a crear la configuracion para las ip elasticas, debemos tener dos ip elasticas estas son apra cada nat gateway y las asociamos a la vpc que creamos
+>En esta seccion vamos a crear la configuracion para las ip elasticas, debemos tener dos ip elasticas estas son apra cada nat gateway y las asociamos a la vpc que creamos
 ```
   ##Elastic IP
   AipELASTIC:
