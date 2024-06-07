@@ -1,0 +1,131 @@
+{
+	"Name": "My Estimate",
+	"Total Cost": {
+		"monthly": "164.79",
+		"upfront": "0.00",
+		"12 months": "1977.48"
+	},
+	"Metadata": {
+		"Currency": "USD",
+		"Locale": "en_US",
+		"Created On": "6/6/2024",
+		"Legal Disclaimer": "AWS Pricing Calculator provides only an estimate of your AWS fees and doesn't include any taxes that might apply. Your actual fees depend on a variety of factors, including your actual usage of AWS services.",
+		"Share Url": "https://calculator.aws/#/estimate?id=c9315dba89c17991b29b49ff7813737418b90c98"
+	},
+	"Groups": {
+		"Services": [
+			{
+				"Service Name": "Network Address Translation (NAT) Gateway",
+				"Region": "US East (N. Virginia)",
+				"Status": "",
+				"Service Cost": {
+					"monthly": "66.16",
+					"upfront": "0.00",
+					"12 months": "793.92"
+				},
+				"Properties": {
+					"Number of NAT Gateways": "2"
+				}
+			},
+			{
+				"Service Name": "Public IPv4 Address",
+				"Region": "US East (N. Virginia)",
+				"Status": "",
+				"Service Cost": {
+					"monthly": "7.30",
+					"upfront": "0.00",
+					"12 months": "87.60"
+				},
+				"Properties": {
+					"Number of In-use public IPv4 addresses": "1",
+					"Number of Idle public IPv4 addresses": "1"
+				}
+			},
+			{
+				"Service Name": "Data Transfer",
+				"Region": "US East (N. Virginia)",
+				"Status": "",
+				"Service Cost": {
+					"monthly": "0.27",
+					"upfront": "0.00",
+					"12 months": "3.24"
+				},
+				"Properties": {
+					"DT Inbound: Not selected": "0 TB per month",
+					"DT Outbound: Internet": "3 GB per month",
+					"DT Intra-Region:": "0 TB per month",
+					"Data transfer cost": "0.27"
+				}
+			},
+			{
+				"Service Name": "Amazon EC2 ",
+				"Region": "US East (N. Virginia)",
+				"Status": "",
+				"Service Cost": {
+					"monthly": "24.27",
+					"upfront": "0.00",
+					"12 months": "291.28"
+				},
+				"Properties": {
+					"Tenancy": "Shared Instances",
+					"Operating system": "Linux",
+					"Workload": "Monthly, Baseline: 3, Peak: 5, Duration of peak: 3 Day 0 Hr 0 Min",
+					"Advance EC2 instance": "t3.micro",
+					"Pricing strategy": "On-Demand",
+					"Enable monitoring": "disabled",
+					"DT Inbound: Not selected": "0 TB per month",
+					"DT Outbound: US East (Verizon) - Nashville": "100 GB per month",
+					"DT Intra-Region:": "0 TB per month"
+				}
+			},
+			{
+				"Service Name": "Amazon RDS for MariaDB",
+				"Region": "US East (N. Virginia)",
+				"Status": "",
+				"Service Cost": {
+					"monthly": "47.82",
+					"upfront": "0.00",
+					"12 months": "573.84"
+				},
+				"Properties": {
+					"Storage amount": "100 GB",
+					"Nodes": "1",
+					"Instance type": "db.t3.micro",
+					"Utilization (On-Demand only)": "100 %Utilized/Month",
+					"Deployment selection": "Multi-AZ",
+					"Pricing strategy": "OnDemand",
+					"Storage volume": "General Purpose SSD (gp2)",
+					"Total Size of Backup Processed for Export (GB)": "per month"
+				}
+			},
+			{
+				"Service Name": "Application Load Balancer",
+				"Region": "US East (N. Virginia)",
+				"Status": "",
+				"Service Cost": {
+					"monthly": "16.47",
+					"upfront": "0.00",
+					"12 months": "197.64"
+				},
+				"Properties": {
+					"Number of Application Load Balancers": "1"
+				}
+			},
+			{
+				"Service Name": "Amazon CloudWatch",
+				"Region": "US East (N. Virginia)",
+				"Status": "",
+				"Service Cost": {
+					"monthly": "2.50",
+					"upfront": "0.00",
+					"12 months": "30.05"
+				},
+				"Properties": {
+					"Number of Metrics (includes detailed and custom metrics)": "5",
+					"Standard Logs: Data Ingested": "1 GB",
+					"Number of Standard Resolution Alarm Metrics": "5"
+				}
+			}
+		]
+	}
+}
