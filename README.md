@@ -113,7 +113,7 @@ En la siguiente imagen se muestra el diseño de la arquitectura a partir de los 
 
 ### Determinar presupuesto de acuerdo con los servicios AWS usados.
 ![aws_calculator](img/estimation.PNG)
-El documento PDF con el detalle del pricing esta disponible en el siguiente link [PDF Pricing](source/My Estimate - AWS Pricing Calculator.pdf)
+El documento PDF con el detalle del pricing esta disponible en el siguiente link [PDF Pricing](source/AWSPricingCalculator.pdf)
 
 
 ## Ejecucion
