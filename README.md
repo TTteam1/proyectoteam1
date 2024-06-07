@@ -134,7 +134,8 @@ Parameters:
     Type: String
     Default: 172.16.0.0/16
 ```
-Vamos a asociar las subnets a las ips y les vamos a asociar un nombre para cada subnet debemos asociar una ip que no se traslapen entre si.
+> [!NOTE]
+>Vamos a asociar las subnets auna ip por cada subnet, cada rango de ip debe ser diferente para que no se traslapen estas subredes.
 ```
   PublicSubnetAIP:
     Type: String
@@ -160,6 +161,50 @@ Vamos a asociar las subnets a las ips y les vamos a asociar un nombre para cada 
     Type: String
     Default: 172.16.6.0/24
 ```
+
+> [!NOTE]
+>Luego tenemos la seccion de recusos, en la cual vamos a definir los recuros que vamos a crear y que son necesarios para el despliegue.
+Vamos a tener la creacion de la vpc, la cual se crea como un recurso de EC2,  la asociamos con el nombre que asociamos  en los recursos y asignamos la ip, esto nos permitira asignarle el rango de ip que se configuro anteriormente a la vpc que estamos creando.
+```
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 
+        Ref: VpcCIDR
+      EnableDnsHostnames: true
+      Tags:  
+        - Key: Name
+          Value: VPC-WEB-SERVER-BOOK   #le damos un nombre, este nombre es el que se vera en aws        # se le pasa valores de key y valuepara definir esto.
+```
+> [!NOTE]
+>Se realiza la configuracion para la creacion de las subnets, aqui la asociamos a la vpc que creamos, definimos una zona de disponibilidad, la asociamos a los parametros que teniamos anteriormente cuando definimos los parametros y las ip, esto lo debemos hacer para cada subnet, lo que va a cambiar son los nombres y la zona de disponibilidad
+```
+  PublicSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      AvailabilityZone: us-east-1a
+      CidrBlock: 
+        Ref: PublicSubnetAIP
+      Tags:
+        - Key: Name
+          Value: PublicSubnetA 
+
+  PublicSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: 
+        Ref: VPC
+      AvailabilityZone: us-east-1b
+      CidrBlock: 
+        Ref: PublicSubnetBIP
+      Tags:
+        - Key: Name
+          Value: PublicSubnetB 
+```
+
 * Documento la implementación a través de capas usando el servicio AWS Cloudformation y AWS Pipeline.
 * Describir cada uno de los componentes usados durante la implementación.
 * Argumentar de acuerdo con el AWS Well-Architect Framework.
