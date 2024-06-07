@@ -121,6 +121,7 @@ para la creacion de los recursos que satisfagan los requerimientos y recursos qu
 > en esta seccion se va a explicar el contenido que los archivos pricipales para configurar nuestra arquitectura dentro de aws.
 <p>Primero tenemos la seccion de parametros.<p>
 En esta seccion vamos a asociar la vpc a una ip
+
 ```
 AWSTemplateFormatVersion: "2010-09-09"
 
