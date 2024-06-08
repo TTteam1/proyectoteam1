@@ -788,7 +788,7 @@ aws cloudformation create-stack --stack-name aws-stack --template-body file://aw
 ## Seguimiento y Control
 Describir la configuración del servicio de AWS Cloudwatch.
 
-Instalación del Agente  
+Instalación del Agente  <br>
 ![fig1](img/1.png)    
 Creación del Parameter  
 ![fig2](img/2.png)  
