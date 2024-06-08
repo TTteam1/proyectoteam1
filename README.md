@@ -776,12 +776,6 @@ aws cloudformation validate-template --template-body file://network.yml
 aws cloudformation create-stack --stack-name aws-stack --template-body file://aws-stack.yml
 ```
 
-
-Ejemplo de codigo
-```
-codigo
-```
-
 ## Seguimiento y Control
 Describir la configuración del servicio de AWS Cloudwatch.
 
