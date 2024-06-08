@@ -789,3 +789,15 @@ aws cloudformation create-stack --stack-name aws-stack --template-body file://aw
 Describir la configuración del servicio de AWS Cloudwatch.
 
 
+![fig1](img/1.png)    
+
+![fig2](img/2.png)  
+![fig3](img/3.png)  
+![fig4](img/4.png)  
+![fig5](img/5.png)  
+![fig6](img/6.png)  
+![fig7](img/7.png)  
+![fig8](img/8.png)  
+![fig9](img/9.png)  
+
+
