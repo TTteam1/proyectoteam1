@@ -110,6 +110,7 @@ En la siguiente imagen se muestra el diseño de la arquitectura a partir de los 
 
 ### Diagrama de Gantt.
 -Imagen
+![diagramagantt](img/diagramagan.png)
 
 ### Determinar presupuesto de acuerdo con los servicios AWS usados.
 ![aws_calculator](img/estimation.PNG)
