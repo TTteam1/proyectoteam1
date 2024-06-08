@@ -112,7 +112,7 @@ En la siguiente imagen se muestra el diseño de la arquitectura a partir de los 
 En la siguiente imagen se muestra el tiempo de dedicación previsto para las diferentes actividades requeridas para el proyecto   
 ![diagramagantt](img/diagramagan.png)    
 
-El documento en excel con el detalle de las tareas esta disponible en el siguiente link [PDF Pricing](source/"Diagrama de Gantt.xlsx")
+El documento en excel con el detalle de las tareas esta disponible en el siguiente link [diagramagantt](source/Diagrama%20de%20Gantt.xlsx)
 
 
 
