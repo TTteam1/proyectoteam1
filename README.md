@@ -790,19 +790,19 @@ Describir la configuración del servicio de AWS Cloudwatch.
 
 Instalación del Agente  <br>
 ![fig1](img/1.png)    
-Creación del Parameter  
-![fig2](img/2.png)  
-![fig3](img/3.png)  
-Creación de la Alarma  
-![fig4](img/4.png)  
-Alarma Activada   
-![fig5](img/5.png)  
-![fig6](img/6.png)  
-
-Mail Alarm Generación de la alarma  
-![fig7](img/7.png)  
-Se restablece la alarma   
-![fig8](img/8.png)  
-![fig9](img/9.png)  
+<br> Creación del Parameter  
+<br>![fig2](img/2.png)  
+<br>![fig3](img/3.png)  
+<br>Creación de la Alarma  
+<br>![fig4](img/4.png)  
+<br>Alarma Activada   
+<br>![fig5](img/5.png)  
+<br>![fig6](img/6.png)  
+<br>
+<br>Mail Alarm Generación de la alarma  
+<br>![fig7](img/7.png)  
+<br>Se restablece la alarma   
+<br>![fig8](img/8.png)  
+<br>![fig9](img/9.png)  
 
 
