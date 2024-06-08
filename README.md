@@ -356,7 +356,7 @@ Resources:
         Ref: NatGatewayB          
 ```
 > [!NOTE]
->Vamos asociar nuestra route table cpn el natgateway y con la subneta la que deseamos asociar
+>Vamos asociar nuestra route table con el natgateway y con la subnet,sera la que deseamos asociar
 ```
   NWARouteAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -373,6 +373,391 @@ Resources:
         Ref: RouteTableNatGatewayB
       SubnetId: 
         Ref: PrivateSubnetB
+```
+> [!NOTE]
+>como outputs para este archivo yaml vamos a tener nombres de recursos como lo son las subredes y la vpc
+
+```
+Outputs:
+
+  VPC: 
+    Description: VPC ID
+    Value: 
+      Ref: VPC
+    Export:
+      Name: !Sub '${AWS::StackName}-VPCID'
+
+  PublicSubnetA:
+    Description: Public Subnet A ID
+    Value: 
+      Ref: PublicSubnetA
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnetA'
+
+  PublicSubnetB:
+    Description: Public Subnet B ID
+    Value: 
+      Ref: PublicSubnetB
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnetB'
+
+  PrivateSubnetA:
+    Description: Private Subnet A ID
+    Value: 
+      Ref: PrivateSubnetA
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnetA'
+  
+  PrivateSubnetB:
+    Description: Private Subnet B ID
+    Value: 
+      Ref: PrivateSubnetB
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnetB'
+
+  PrivateSubnetAA:
+    Description: Private Subnet AA ID
+    Value: 
+      Ref: PrivateSubnetAA
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnetAA'
+  
+  PrivateSubnetBB:
+    Description: Private Subnet BB ID
+    Value: 
+      Ref: PrivateSubnetBB
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnetBB'
+```
+
+
+En el siguiente archivo vamos a tener la siguiente configuracion, en este vamos a manejar la configuracion interna que se necesito como por ejmeplo los segurity group, la imtancia pricipal que contendra nuestra aplicacion y el load balencer entro otros.
+
+> [!NOTE]
+>Aqui tendremos la explicacion del contenido del archivo application.yml, en este archivo encontraremos la configuracion de los security groups 
+
+Vamos a crear el SG para la intancia principal, en esta seccion podemos ver que le podemos configurar y permitir el tipo de conexion que deseamos que tenga, tambien le asiganmos los puertos que van hacer permitidos para la conexion
+```
+Resources:
+
+#Create the SG for instance
+  SGbookPublic:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow connection through SSH
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 5000
+          ToPort: 5000
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: sg-book-ws
+      VpcId:
+        Fn::ImportValue:
+          !Sub "network-stack-VPCID"
+        
+  #Create the SG for instance in subnet private
+  SGbookPrivate:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow connection through SSH and HTTP for instance un subnet private
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          SourceSecurityGroupId: !GetAtt SGbookPublic.GroupId
+        - IpProtocol: tcp
+          FromPort: 5000
+          ToPort: 5000
+          SourceSecurityGroupId: !GetAtt SGalb.GroupId
+      Tags:
+        - Key: Name
+          Value: sg-book-private
+      VpcId:
+        Fn::ImportValue:
+          !Sub "network-stack-VPCID"
+
+  #Create the SG for ALB
+  SGalb:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow connection through HTTP
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0     
+      Tags:
+        - Key: Name
+          Value: sg-alb
+      VpcId:
+        Fn::ImportValue:
+          !Sub "network-stack-VPCID"
+
+  #Create the SG for DB
+  SGdb:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow connection through SSH and MYSQL for DB in subnet private
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: sg-db
+      VpcId:
+        Fn::ImportValue:
+          !Sub "network-stack-VPCID"
+```
+
+> [!NOTE]
+>En la siguiente seccion vamos a crear la intancia pricipal, le debemos definir la zona en donde lo queremos y debemos defir o crear un keypair para este despliegue de la infraestructura y asociar el nombre de la kay pair al yaml, asociamos el segurity group al cual lo vamos a asociar, en la intancia tambien podemos pasarle los comando que queremos que se ejecuten, por ejemplo en esta intancia estamos haciendo la instalacion de las herramientas o complementos que necesitamos apra ejecutar nuestra aplicacion dentro de la intancia, estamos tambien descargando archivos de un bucket y los estamos almacenando y descomprimiendo e incluso estamos alimentando los datos d ela base de datos en rds directamente y tambien creamos el launchtemplate con la informacion que se desa configurar como el kay pair, el sg, esta sera para la conmfiguracion para lanzar la intancia que deseamos crear, tenemos una instancia pequeña debido a la configuracion que vamos a tener.
+
+```
+  #Create the instance
+  bookWSpublic:
+    Type: AWS::EC2::Instance
+    DependsOn:
+      - DBbook
+    Properties:
+      AvailabilityZone: us-east-1a
+      ImageId: ami-0bb84b8ffd87024d8
+      InstanceType: t2.micro
+      IamInstanceProfile: rolebookacces
+      KeyName: keyfin
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: 0
+          SubnetId:
+            Fn::ImportValue:
+              !Sub "network-stack-PublicSubnetA"
+          GroupSet:
+            - Ref: SGbookPublic       
+      Tags:
+        - Key: Name
+          Value: book-ws-public
+      UserData: 
+        Fn::Base64: !Sub | 
+          #!/bin/bash
+          sudo dnf install -y python3.9-pip
+          pip install virtualenv
+          sudo dnf install -y mariadb105-server
+          sudo service mariadb start
+          sudo chkconfig mariadb on
+          pip install flask
+          pip install mysql-connector-python
+          pip install boto3
+          wget https://jav-bucket-web.s3.amazonaws.com/python-db-ssm.zip          
+          wget https://jav-bucket-web.s3.amazonaws.com/databases.zip
+          wget https://jav-bucket-web.s3.amazonaws.com/BookDbDump.sql
+          sleep 2
+          sudo unzip python-db-ssm.zip
+          sudo unzip databases.zip 
+          sudo mv python-db-ssm databases /home/ec2-user
+          wget https://jav-bucket-web.s3.amazonaws.com/bookapp.service
+          sudo mv bookapp.service /etc/systemd/system
+          DB_PASSWORD=$(aws ssm get-parameter --name "/book/password" --query "Parameter.Value" --output text --region "us-east-1")
+          mysql -u root -p$DB_PASSWORD --host ${DBbook.Endpoint.Address} < BookDbDump.sql
+          sudo systemctl daemon-reload
+          sudo systemctl start bookapp
+          sudo systemctl enable bookapp  
+        
+  ##Create a launch Template
+  LaunchTemplateBook:
+    Type: AWS::EC2::LaunchTemplate
+    DependsOn:
+      - DBbook
+    Properties:
+      LaunchTemplateData:
+        IamInstanceProfile: 
+          Name: rolebookacces
+        ImageId: ami-0bb84b8ffd87024d8
+        KeyName: keyfin
+        InstanceType: t2.micro
+        SecurityGroupIds: 
+          - Ref: SGbookPrivate  
+        UserData: 
+          Fn::Base64: !Sub | 
+            #!/bin/bash
+            sudo dnf install -y python3.9-pip
+            pip install virtualenv
+            sudo dnf install -y mariadb105-server
+            sudo service mariadb start
+            sudo chkconfig mariadb on
+            pip install flask
+            pip install mysql-connector-python
+            pip install boto3
+            wget https://jav-bucket-web.s3.amazonaws.com/python-db-ssm.zip          
+            wget https://jav-bucket-web.s3.amazonaws.com/databases.zip
+            wget https://jav-bucket-web.s3.amazonaws.com/BookDbDump.sql
+            sleep 2
+            sudo unzip python-db-ssm.zip
+            sudo unzip databases.zip 
+            sudo mv python-db-ssm databases /home/ec2-user
+            wget https://jav-bucket-web.s3.amazonaws.com/bookapp.service
+            sudo mv bookapp.service /etc/systemd/system
+            DB_PASSWORD=$(aws ssm get-parameter --name "/book/password" --query "Parameter.Value" --output text --region "us-east-1")
+            mysql -u root -p$DB_PASSWORD --host ${DBbook.Endpoint.Address} < BookDbDump.sql
+            sudo systemctl daemon-reload
+            sudo systemctl start bookapp
+            sudo systemctl enable bookapp 
+      LaunchTemplateName: lt-book 
+
+```
+
+> [!NOTE]
+>En este bloque vamos a tener la configuracion necesaria para el laoad balancer que vamos a configurar, para ello debemos asociarlo a una subnet, en este caso sera a las dos subnet publicas que creamos, esta asociasion la hacemos mediante la extraccion del nombre, tambien vamos a tener la confguracionn del target group este nos ayudara a enrutar el trafico mediante unas reglas, tambien definimos el path para configurar los health checks para las instancias, se debe crear el listener este sera el encargado de escuchar las peticiones y definimos el puerto al cual deseamos tener permitido escuchar
+
+```
+  ##Create the Application Load Balancer
+  ALBbook:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: alb-book
+      Scheme: internet-facing
+      SecurityGroups: 
+        - Ref: SGalb
+      Subnets: 
+        - Fn::ImportValue: !Sub "network-stack-PublicSubnetA"
+        - Fn::ImportValue: !Sub "network-stack-PublicSubnetB"
+      Type: application
+
+  #Create the target group
+  TGelb:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckEnabled: true
+      HealthCheckPath: /health
+      Name: tg-wsbook
+      Port: 5000
+      Protocol: HTTP
+      TargetType: instance
+      VpcId: 
+        Fn::ImportValue:
+          !Sub "network-stack-VPCID"
+
+  #Create a listener for ALB
+  ListenerALB:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: 
+        Ref: ALBbook
+      Port: 80
+      Protocol: HTTP 
+      DefaultActions:
+        - Type: forward 
+          TargetGroupArn: 
+            Ref: TGelb  
+``` 
+
+> [!NOTE]
+>En esta seccion tenemos la configuracion  del auto scaling group, para este debemos asociar un sg y vamos a defirnir las intancias con las cuales minimo trabajaremos y maximo tendremos, esto es para tener una alta disponibiliad de la aplicacion, tambien vamos a definir la polita para el esalamiento, en este caso lo vamos a hacer mediante al consumo de cpu, si el consumo es mayor a 75 comenzara a escalar y aprovisionar el neuvo recurso.
+
+``` 
+  #Create the Auto Scaling group
+  ASGbook:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AutoScalingGroupName: asg-book
+      DesiredCapacity: 2
+      MaxSize: 4
+      MinSize: 2
+      LaunchTemplate: 
+        LaunchTemplateId: 
+          Ref: LaunchTemplateBook          
+        Version: !GetAtt LaunchTemplateBook.LatestVersionNumber
+      TargetGroupARNs: 
+        - Ref: TGelb
+      VPCZoneIdentifier: 
+        - Fn::ImportValue: !Sub "network-stack-PrivateSubnetA"
+        - Fn::ImportValue: !Sub "network-stack-PrivateSubnetB"
+
+  #Create the Scaling policy
+  ScalingPolicyASG:
+    Type: AWS::AutoScaling::ScalingPolicy
+    Properties:
+      AutoScalingGroupName: 
+        Ref: ASGbook
+      PolicyType: TargetTrackingScaling
+      TargetTrackingConfiguration: 
+        PredefinedMetricSpecification: 
+          PredefinedMetricType: ASGAverageCPUUtilization
+        TargetValue: 75
+```
+
+> [!NOTE]
+>En este segmento vamos a configurar las caracteristicas de nuestra base de datos, definimos caracteristicas del tipo de maquina que va a componerla el sg que va a tener la zona en la cual vamos a deplegarla y agregamos el subnetgroup a la base de datos en este caso la vamos a asociar para nuestras dos subnets privadas
+
+```
+   ##Create the databases
+  DBbook:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: 20
+      AvailabilityZone: us-east-1a
+      DBInstanceIdentifier: databasebook
+      DBInstanceClass: db.t3.micro
+      DBName: dbbook
+      DBSubnetGroupName: 
+        Ref: DBbookSubnetGroup
+      Engine: mariadb
+      VPCSecurityGroups:
+        - Ref: SGdb
+      MasterUsername: root
+      MasterUserPassword: '{{resolve:ssm:/book/password:1}}'
+
+  ##Create the subnets
+  DBbookSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Subnets about db
+      DBSubnetGroupName: db-subnet-group-db
+      SubnetIds:
+        - Fn::ImportValue: !Sub "network-stack-PrivateSubnetAA"
+        - Fn::ImportValue: !Sub "network-stack-PrivateSubnetBB"
+
+```
+
+> [!NOTE]
+>como outputs vamos a tener los nombres de recursos o obtener los datos de las ip, esto lo hacemos mediante esta opción !Sub "netwoRk-stack-book-ws-public" e incluso obtenemos en endpoint de la abse de datos
+
+```
+Outputs:
+  bookWSpublic:
+    Description: Public IP of the book-ws
+    Value: !GetAtt bookWSpublic.PublicIp
+    Export:
+      Name: !Sub "netwoRk-stack-book-ws-public"
+  bookWSprivate:
+    Description: Private IP of the book-ws
+    Value: !GetAtt bookWSpublic.PrivateIp
+    Export:
+      Name: !Sub "network-stack-book-ws-private"
+  bookWSALB:
+    Description: ALB of the book-ws
+    Value: !GetAtt ALBbook.DNSName
+    Export:
+      Name: !Sub "network-stack-book-ws-alb"
+  SGdb:
+    Description: SG for DB
+    Value:
+      Ref: SGdb
+    Export:
+      Name: !Sub "network-stack-SGdb"
+  DBbook:
+    Description: Database endpoint
+    Value: !GetAtt DBbook.Endpoint.Address
 ```
 
 * Documento la implementación a través de capas usando el servicio AWS Cloudformation y AWS Pipeline.
