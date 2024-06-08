@@ -102,7 +102,16 @@ web que será lanzado en las instancias en las dos subredes privadas.
 En la siguiente imagen se muestra el diseño de la arquitectura a partir de los requerimientos.
 ![arquitectura](img/Arquitectura.png)
   
-### Identificar Roles.
+### Identificar Roles.   
+
+| Role                     | Nombre          |
+| ------------------------ | --------------- |
+| Web administrator        | Felipe Chacon   |
+| Data Base administrator  | Danny Riano     |
+| RDS audit                | Carlos Gonzalez |
+| EC2 audit                | Manuel Caita    |
+
+
 * Web administrator
 * Data Base administrator
 * Relational Database Service (RDS) audit
