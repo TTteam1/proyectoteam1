@@ -774,16 +774,37 @@ Outputs:
     Value: !GetAtt DBbook.Endpoint.Address
 ```
 > [!IMPORTANT]
->Con este comando vamos aplicar el comando, se debe hacer primero con el yaml de network y esperar que se complete este stack para asi aplicar el siguiente yaml
+>Se debe validar que todo este bien en nuestro template.
 ```
 #primero validamos si esta todo correctamente en el template
 aws cloudformation validate-template --template-body file://network.yml
 ```
 
+> [!IMPORTANT]
+para el despliegue de nuestros archivos vamos a crear un repositorio dentro de aws esto lo hacemos mediante el siguiente comando.
+
 ```
-#aplicamos el yaml dentro de aws
-aws cloudformation create-stack --stack-name aws-stack --template-body file://aws-stack.yml
+aws codecommit create-repository --repository-name proyecto-cicd --repository-description "automatizar despliegue de infraestructura"
 ```
+
+luego podemos validar si se creo el repositorio con el siguiente codigo:
+```
+aws codecommit get-repository --repository-name proyecto-cicd
+```
+
+ahora debemos clonar el repositorio en nuestro local, vamos a cargar el contenido de los archivos network.yml y application.yml
+```
+git clone remplazar por la url del repositorio creado en aws
+```
+luego vamos a agregar los cambios mediante
+```
+git add .
+#aplicamos el commit para subir los cambios
+git commit -m “configurando capa de red”
+#luego el push para subir los datos
+git push codecommit::us-east-1://nombrerepositorio
+```
+debemos crear un pipeline para que automaticamente se aplique los cambio cuando se hace un push a este repositorio, necesitamos 1 pipeline por cada archivo subido al repositorio, mediante este pipeline se realiza el CI/CD para nuestro proceso
 
 ## Seguimiento y Control
 Describir la configuración del servicio de AWS Cloudwatch.
