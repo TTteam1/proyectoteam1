@@ -764,10 +764,17 @@ Outputs:
     Description: Database endpoint
     Value: !GetAtt DBbook.Endpoint.Address
 ```
+> [!IMPORTANT]
+>Con este comando vamos aplicar el comando, se debe hacer primero con el yaml de network y esperar que se complete este stack para asi aplicar el siguiente yaml
+```
+#primero validamos si esta todo correctamente en el template
+aws cloudformation validate-template --template-body file://network.yml
+```
 
-* Documento la implementación a través de capas usando el servicio AWS Cloudformation y AWS Pipeline.
-* Describir cada uno de los componentes usados durante la implementación.
-* Argumentar de acuerdo con el AWS Well-Architect Framework.
+```
+#aplicamos el yaml dentro de aws
+aws cloudformation create-stack --stack-name aws-stack --template-body file://aws-stack.yml
+```
 
 
 Ejemplo de codigo
