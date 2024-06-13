@@ -110,7 +110,7 @@ En la siguiente imagen se muestra el diseño de la arquitectura a partir de los 
 | Data Base administrator  | Danny Riano     |
 | RDS audit                | Carlos Gonzalez |
 | EC2 audit                | Manuel Caita    |
-
+![arquitectura](img/Roles.png)
 
 * Web administrator
 * Data Base administrator
