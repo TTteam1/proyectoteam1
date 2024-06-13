@@ -132,7 +132,7 @@ El documento PDF con el detalle del pricing esta disponible en el siguiente link
 
 
 ## Ejecucion
-para la creacion de los recursos que satisfagan los requerimientos y recursos que nos hemos plantado lo vamos a divirdir en dos archivos, el primer archivo lo vamos a confgurar con la parametrizaciones de red, como lo es la vpc, las subredes, internet gateway, nat gateway,  routebles y routes, lo llamaremos como network.yaml
+para la creacion de los recursos que satisfagan los requerimientos y recursos que nos hemos planteado seguiremos los 6 pilares del AWS Well-Architected Framework <br> y lo vamos a divirdir en dos archivos, el primer archivo lo vamos a confgurar con la parametrizaciones de red, como lo es la vpc, las subredes, internet gateway, nat gateway,  route tables y routes, lo llamaremos como network.yaml
 
 > [!IMPORTANT]
 > en esta seccion se va a explicar el contenido que los archivos pricipales para configurar nuestra arquitectura dentro de aws.
@@ -807,6 +807,7 @@ git push codecommit::us-east-1://nombrerepositorio
 debemos crear un pipeline para que automaticamente se aplique los cambio cuando se hace un push a este repositorio, necesitamos 1 pipeline por cada archivo subido al repositorio, mediante este pipeline se realiza el CI/CD para nuestro proceso
 
 ## Seguimiento y Control
+Aplicando el pilar de la Excelencia Operativa del AWS Well-Architected Framework, implementamos CloudWatch para la supervision y control
 Describir la configuración del servicio de AWS Cloudwatch.
 
 Instalación del Agente  <br>
