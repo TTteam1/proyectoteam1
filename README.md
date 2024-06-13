@@ -185,7 +185,7 @@ Parameters:
 
 > [!NOTE]
 >Luego tenemos la seccion de recusos, en la cual vamos a definir los recursos que vamos a crear y que son necesarios para el despliegue.
-Vamos a tener la creacion de la vpc, la cual se crea como un recurso de EC2,  la asociamos con el nombre que asociamos  en los recursos y asignamos la ip, esto nos permitira asignarle el rango de ip que se configuro anteriormente a la vpc que estamos creando.
+Vamos a tener la creacion de la vpc, la cual se crea como un recurso de EC2,  la asociamos con el nombre que definimos en los recursos y asignamos la ip, esto nos permitira asignarle el rango de ip que se configuro anteriormente a la vpc que estamos creando.
 ```
 Resources:
   VPC:
@@ -287,7 +287,7 @@ Resources:
         Ref: PublicSubnetB
 ```
 > [!NOTE]
->Vamos a crear el recurso de la nat gateway, esto nos permitira que nos podamos conectar a intenet, como tenemos dos subredes publicas debemos crear dos nat gateway, cada una la vamos a asociar a un subred y le vamos a asociar un ip elastica, esta asociasion la vamos a realizar por medio del nombre de la ip elastica.
+>Vamos a crear el recurso de la nat gateway, esto nos permitira que nos podamos conectar a intenet, como tenemos dos subredes publicas debemos crear dos nat gateway, cada una la vamos a asociar a un subred y le vamos a asociar un ip elastica, esta asociacion la vamos a realizar por medio del nombre de la ip elastica.
 ```
   NatGatewayA:
     Type: AWS::EC2::NatGateway
@@ -374,7 +374,7 @@ Resources:
         Ref: NatGatewayB          
 ```
 > [!NOTE]
->Vamos asociar nuestra route table con el natgateway y con la subnet,sera la que deseamos asociar
+>Vamos asociar nuestra route table con el natgateway y con la subnet,sera la que deseamos asociar.
 ```
   NWARouteAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -393,7 +393,7 @@ Resources:
         Ref: PrivateSubnetB
 ```
 > [!NOTE]
->como outputs para este archivo yaml vamos a tener nombres de recursos como lo son las subredes y la vpc
+Como outputs para este archivo yaml vamos a tener nombres de recursos como lo son las subredes y la vpc.
 
 ```
 Outputs:
@@ -452,7 +452,7 @@ Outputs:
 En el siguiente archivo vamos a tener la siguiente configuracion, en este vamos a manejar la configuracion interna que se necesito como por ejmeplo los segurity group, la imtancia pricipal que contendra nuestra aplicacion y el load balencer entro otros.
 
 > [!NOTE]
->Aqui tendremos la explicacion del contenido del archivo application.yml, en este archivo encontraremos la configuracion de los security groups 
+>Aqui tendremos la explicacion del contenido del archivo application.yml, en este archivo encontraremos la configuracion de los security groups. 
 
 Vamos a crear el SG para la intancia principal, en esta seccion podemos ver que le podemos configurar y permitir el tipo de conexion que deseamos que tenga, tambien le asiganmos los puertos que van hacer permitidos para la conexion. Esta conexion esta ligada  al AWS Well-Architected-Framework dentro del pilar de seguridad.
 ```
@@ -540,7 +540,7 @@ Resources:
 ```
 
 > [!NOTE]
->En la siguiente seccion vamos a crear la intancia pricipal, le debemos definir la zona en donde lo queremos y debemos defir o crear un keypair para este despliegue de la infraestructura y asociar el nombre de la kay pair al yaml, asociamos el segurity group al cual lo vamos a asociar, en la intancia tambien podemos pasarle los comando que queremos que se ejecuten, por ejemplo en esta intancia estamos haciendo la instalacion de las herramientas o complementos que necesitamos para ejecutar nuestra aplicacion dentro de la intancia, estamos tambien descargando archivos de un bucket y los estamos almacenando y descomprimiendo e incluso estamos alimentando los datos d ela base de datos en rds directamente y tambien creamos el launchtemplate con la informacion que se desa configurar como el kay pair, el sg, esta sera para la conmfiguracion para lanzar la intancia que deseamos crear, tenemos una instancia pequeña debido a la configuracion que vamos a tener.
+>En la siguiente seccion vamos a crear la intancia pricipal, le debemos definir la zona en donde lo queremos y debemos defir o crear un keypair para este despliegue de la infraestructura y asociar el nombre de la kay pair al yaml, asociamos el segurity group al cual lo vamos a asociar, en la intancia tambien podemos pasarle los comando que queremos que se ejecuten, por ejemplo en esta intancia estamos haciendo la instalacion de las herramientas o complementos que necesitamos para ejecutar nuestra aplicacion dentro de la intancia, estamos tambien descargando archivos de un bucket y los estamos almacenando y descomprimiendo e incluso estamos alimentando los datos de la base de datos en rds directamente y tambien creamos el launchtemplate con la informacion que se desa configurar como el key pair, el sg, esta sera para la conmfiguracion para lanzar la intancia que deseamos crear, tenemos una instancia pequeña debido a la configuracion que vamos a tener.
 
 ```
   #Create the instance
@@ -635,7 +635,7 @@ Resources:
 ```
 
 > [!NOTE]
->En este bloque vamos a tener la configuracion necesaria para el laoad balancer que vamos a configurar, para ello debemos asociarlo a una subnet, en este caso sera a las dos subnet publicas que creamos, esta asociasion la hacemos mediante la extraccion del nombre, tambien vamos a tener la configuracion del target group este nos ayudara a enrutar el trafico mediante unas reglas, tambien definimos el path para configurar los health checks para las instancias, se debe crear el listener este sera el encargado de escuchar las peticiones y definimos el puerto al cual deseamos tener permitido escuchar. Esta creacion esta asociada al pilar de seguridad del AWS Well-Architected-Framework.
+>En este bloque vamos a tener la configuracion necesaria para el laoad balancer que vamos a configurar, para ello debemos asociarlo a una subnet, en este caso sera a las dos subnet publicas que creamos, esta asociacion la hacemos mediante la extraccion del nombre, tambien vamos a tener la configuracion del target group este nos ayudara a enrutar el trafico mediante unas reglas, tambien definimos el path para configurar los health checks para las instancias, se debe crear el listener este sera el encargado de escuchar las peticiones y definimos el puerto al cual deseamos tener permitido escuchar. Esta creacion esta asociada al pilar de seguridad del AWS Well-Architected-Framework.
 
 ```
   ##Create the Application Load Balancer
@@ -680,7 +680,7 @@ Resources:
 ``` 
 
 > [!NOTE]
->En esta seccion tenemos la configuracion  del auto scaling group, para este debemos asociar un sg y vamos a definir las intancias con las cuales minimo trabajaremos y maximo tendremos, esto es para tener una alta disponibiliad de la aplicacion, tambien vamos a definir la polita para el escalamiento, en este caso lo vamos a hacer mediante al consumo de cpu, si el consumo es mayor a 75 comenzara a escalar y aprovisionar el nuevo recurso. Esta creacion esta asociada al pilar de fiabilidad, pilar de eficacia y rendimiento y pilar de optimizacion de costos del AWS Well-Architected-Framework.
+>En esta seccion tenemos la configuracion  del auto scaling group, para este debemos asociar un sg y vamos a definir las intancias con las cuales minimo trabajaremos y maximo tendremos, esto es para tener una alta disponibiliad de la aplicacion, tambien vamos a definir la polita para el escalamiento, en este caso lo vamos a hacer mediante al consumo de cpu, si el consumo es mayor a 75 % comenzara a escalar y aprovisionar el nuevo recurso. Esta creacion esta asociada al pilar de fiabilidad, pilar de eficacia y rendimiento y pilar de optimizacion de costos del AWS Well-Architected-Framework.
 
 ``` 
   #Create the Auto Scaling group
@@ -715,7 +715,7 @@ Resources:
 ```
 
 > [!NOTE]
->En este segmento vamos a configurar las caracteristicas de nuestra base de datos, definimos caracteristicas del tipo de maquina que va a componerla el sg que va a tener la zona en la cual vamos a deplegarla y agregamos el subnetgroup a la base de datos en este caso la vamos a asociar para nuestras dos subnets privadas. esta creacion esta asociada al pilar de fiabilidad del AWS Well-Architected-Framework.
+>En este segmento vamos a configurar las caracteristicas de nuestra base de datos, definimos caracteristicas del tipo de maquina que va a componerla el sg que va a tener, la zona en la cual vamos a deplegarla y agregamos el subnetgroup a la base de datos en este caso la vamos a asociar para nuestras dos subnets privadas. esta creacion esta asociada al pilar de fiabilidad del AWS Well-Architected-Framework.
 
 ```
    ##Create the databases
@@ -787,22 +787,22 @@ aws cloudformation validate-template --template-body file://network.yml
 > [!IMPORTANT]
 Para el despliegue aplicaremos el proceso de automatizacion de cambios incluido dentro del pilar de excelencia operativa del AWS well-architected-Framework.
 > 
-para el despliegue de nuestros archivos vamos a crear un repositorio dentro de aws esto lo hacemos mediante el siguiente comando.
+Para el despliegue de nuestros archivos vamos a crear un repositorio dentro de aws esto lo hacemos mediante el siguiente comando.
 
 ```
 aws codecommit create-repository --repository-name proyecto-cicd --repository-description "automatizar despliegue de infraestructura"
 ```
 
-luego podemos validar si se creo el repositorio con el siguiente codigo:
+Luego podemos validar si se creo el repositorio con el siguiente codigo:
 ```
 aws codecommit get-repository --repository-name proyecto-cicd
 ```
 
-ahora debemos clonar el repositorio en nuestro local, vamos a cargar el contenido de los archivos network.yml y application.yml
+Ahora debemos clonar el repositorio en nuestro local, vamos a cargar el contenido de los archivos network.yml y application.yml
 ```
 git clone remplazar por la url del repositorio creado en aws
 ```
-luego vamos a agregar los cambios mediante
+Luego vamos a agregar los cambios mediante
 ```
 git add .
 #aplicamos el commit para subir los cambios
@@ -810,10 +810,10 @@ git commit -m “configurando capa de red”
 #luego el push para subir los datos
 git push codecommit::us-east-1://nombrerepositorio
 ```
-debemos crear un pipeline para que automaticamente se aplique los cambio cuando se hace un push a este repositorio, necesitamos 1 pipeline por cada archivo subido al repositorio, mediante este pipeline se realiza el CI/CD para nuestro proceso
+debemos crear un pipeline para que automaticamente se aplique los cambios cuando se hace un push a este repositorio, necesitamos 1 pipeline por cada archivo subido al repositorio, mediante este pipeline se realiza el CI/CD para nuestro proceso.
 
 ## Seguimiento y Control
-Aplicando el pilar de la Excelencia Operativa y optimizacion de costos del AWS Well-Architected Framework, implementamos CloudWatch para la supervision y control
+Aplicando el pilar de la Excelencia Operativa y optimizacion de costos del AWS Well-Architected Framework, implementamos CloudWatch para la supervision y control.
 Describir la configuración del servicio de AWS Cloudwatch.
 
 Instalación del Agente  <br>
