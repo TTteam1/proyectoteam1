@@ -152,7 +152,7 @@ Parameters:
     Default: 172.16.0.0/16
 ```
 > [!NOTE]
->Vamos a asociar las subnets auna ip por cada subnet, cada rango de ip debe ser diferente para que no se traslapen estas subredes.
+>Vamos a asociar las subnets a una ip por cada subnet, cada rango de ip debe ser diferente para que no se trasladen estas subredes.
 ```
   PublicSubnetAIP:
     Type: String
@@ -328,7 +328,7 @@ Resources:
           Value: EIP-nwB
 ```
 > [!NOTE]
->En esta seccion vamos a crear 2 route tables asociadas a la vpc y estas las asociaremos a las nat gateway
+>En esta seccion vamos a crear 2 route tables asociadas a la vpc y estas las asociaremos a las nat gateway. Esta configuracion esta ligada al AWS Well-Architected-Framework dentro del pilar de seguridad.
 ```
   RouteTableNatGatewayA:
     Type: AWS::EC2::RouteTable
@@ -450,7 +450,7 @@ En el siguiente archivo vamos a tener la siguiente configuracion, en este vamos 
 > [!NOTE]
 >Aqui tendremos la explicacion del contenido del archivo application.yml, en este archivo encontraremos la configuracion de los security groups 
 
-Vamos a crear el SG para la intancia principal, en esta seccion podemos ver que le podemos configurar y permitir el tipo de conexion que deseamos que tenga, tambien le asiganmos los puertos que van hacer permitidos para la conexion
+Vamos a crear el SG para la intancia principal, en esta seccion podemos ver que le podemos configurar y permitir el tipo de conexion que deseamos que tenga, tambien le asiganmos los puertos que van hacer permitidos para la conexion. Esta conexion esta ligada  al AWS Well-Architected-Framework dentro del pilar de seguridad.
 ```
 Resources:
 
