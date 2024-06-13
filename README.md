@@ -308,7 +308,7 @@ Resources:
           Value: NatGatewayA-subnetPublicB
 ```
 > [!NOTE]
->En esta seccion vamos a crear la configuracion para las ip elasticas, debemos tener dos ip elasticas estas son apra cada nat gateway y las asociamos a la vpc que creamos
+>En esta seccion vamos a crear la configuracion para las ip elasticas, debemos tener dos ip elasticas estas son para cada nat gateway y las asociamos a la vpc que creamos
 ```
   ##Elastic IP
   AipELASTIC:
@@ -538,7 +538,7 @@ Resources:
 ```
 
 > [!NOTE]
->En la siguiente seccion vamos a crear la intancia pricipal, le debemos definir la zona en donde lo queremos y debemos defir o crear un keypair para este despliegue de la infraestructura y asociar el nombre de la kay pair al yaml, asociamos el segurity group al cual lo vamos a asociar, en la intancia tambien podemos pasarle los comando que queremos que se ejecuten, por ejemplo en esta intancia estamos haciendo la instalacion de las herramientas o complementos que necesitamos apra ejecutar nuestra aplicacion dentro de la intancia, estamos tambien descargando archivos de un bucket y los estamos almacenando y descomprimiendo e incluso estamos alimentando los datos d ela base de datos en rds directamente y tambien creamos el launchtemplate con la informacion que se desa configurar como el kay pair, el sg, esta sera para la conmfiguracion para lanzar la intancia que deseamos crear, tenemos una instancia pequeña debido a la configuracion que vamos a tener.
+>En la siguiente seccion vamos a crear la intancia pricipal, le debemos definir la zona en donde lo queremos y debemos defir o crear un keypair para este despliegue de la infraestructura y asociar el nombre de la kay pair al yaml, asociamos el segurity group al cual lo vamos a asociar, en la intancia tambien podemos pasarle los comando que queremos que se ejecuten, por ejemplo en esta intancia estamos haciendo la instalacion de las herramientas o complementos que necesitamos para ejecutar nuestra aplicacion dentro de la intancia, estamos tambien descargando archivos de un bucket y los estamos almacenando y descomprimiendo e incluso estamos alimentando los datos d ela base de datos en rds directamente y tambien creamos el launchtemplate con la informacion que se desa configurar como el kay pair, el sg, esta sera para la conmfiguracion para lanzar la intancia que deseamos crear, tenemos una instancia pequeña debido a la configuracion que vamos a tener.
 
 ```
   #Create the instance
