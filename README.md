@@ -781,6 +781,8 @@ aws cloudformation validate-template --template-body file://network.yml
 ```
 
 > [!IMPORTANT]
+Para el despliegue aplicaremos el proceso de automatizacion de cambios incluido dentro del pilar de excelencia operativa del AWS well-architected-Framework.
+> 
 para el despliegue de nuestros archivos vamos a crear un repositorio dentro de aws esto lo hacemos mediante el siguiente comando.
 
 ```
