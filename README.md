@@ -129,6 +129,8 @@ El documento en excel con el detalle de las tareas esta disponible en el siguien
 
 
 ### Determinar presupuesto de acuerdo con los servicios AWS usados.
+Imagen final del AWS Calculator, este calculo esta asociada al pilar de optimización de costos del AWS Well-Architected-Framework.
+
 ![aws_calculator](img/estimation.PNG)
 El documento PDF con el detalle del pricing esta disponible en el siguiente link [PDF Pricing](source/AWSPricingCalculator.pdf)
 
