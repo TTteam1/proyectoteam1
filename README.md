@@ -678,7 +678,7 @@ Resources:
 ``` 
 
 > [!NOTE]
->En esta seccion tenemos la configuracion  del auto scaling group, para este debemos asociar un sg y vamos a defirnir las intancias con las cuales minimo trabajaremos y maximo tendremos, esto es para tener una alta disponibiliad de la aplicacion, tambien vamos a definir la polita para el esalamiento, en este caso lo vamos a hacer mediante al consumo de cpu, si el consumo es mayor a 75 comenzara a escalar y aprovisionar el neuvo recurso. Esta creacion esta asociada al pilar de fiabilidad, pilar de eficacia y rendimiento y pilar de optimizacion de costos del AWS Well-Architected-Framework.
+>En esta seccion tenemos la configuracion  del auto scaling group, para este debemos asociar un sg y vamos a definir las intancias con las cuales minimo trabajaremos y maximo tendremos, esto es para tener una alta disponibiliad de la aplicacion, tambien vamos a definir la polita para el escalamiento, en este caso lo vamos a hacer mediante al consumo de cpu, si el consumo es mayor a 75 comenzara a escalar y aprovisionar el nuevo recurso. Esta creacion esta asociada al pilar de fiabilidad, pilar de eficacia y rendimiento y pilar de optimizacion de costos del AWS Well-Architected-Framework.
 
 ``` 
   #Create the Auto Scaling group
