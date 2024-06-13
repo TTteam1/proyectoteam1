@@ -111,7 +111,7 @@ En la siguiente imagen se muestra el diseño de la arquitectura a partir de los 
 | RDS audit                | Carlos Gonzalez |
 | EC2 audit                | Manuel Caita    |
 
-
+Imagen final de la creacion de los distintos roles haciendo uso del modulo AWS-IAM, esta creacion esta asociada al pilar de seguridad del AWS Well-Architected-Framework.
 ![arquitectura](img/Roles.png)
 
 * Web administrator
@@ -633,7 +633,7 @@ Resources:
 ```
 
 > [!NOTE]
->En este bloque vamos a tener la configuracion necesaria para el laoad balancer que vamos a configurar, para ello debemos asociarlo a una subnet, en este caso sera a las dos subnet publicas que creamos, esta asociasion la hacemos mediante la extraccion del nombre, tambien vamos a tener la confguracionn del target group este nos ayudara a enrutar el trafico mediante unas reglas, tambien definimos el path para configurar los health checks para las instancias, se debe crear el listener este sera el encargado de escuchar las peticiones y definimos el puerto al cual deseamos tener permitido escuchar
+>En este bloque vamos a tener la configuracion necesaria para el laoad balancer que vamos a configurar, para ello debemos asociarlo a una subnet, en este caso sera a las dos subnet publicas que creamos, esta asociasion la hacemos mediante la extraccion del nombre, tambien vamos a tener la configuracion del target group este nos ayudara a enrutar el trafico mediante unas reglas, tambien definimos el path para configurar los health checks para las instancias, se debe crear el listener este sera el encargado de escuchar las peticiones y definimos el puerto al cual deseamos tener permitido escuchar. Esta creacion esta asociada al pilar de seguridad del AWS Well-Architected-Framework.
 
 ```
   ##Create the Application Load Balancer
@@ -678,7 +678,7 @@ Resources:
 ``` 
 
 > [!NOTE]
->En esta seccion tenemos la configuracion  del auto scaling group, para este debemos asociar un sg y vamos a defirnir las intancias con las cuales minimo trabajaremos y maximo tendremos, esto es para tener una alta disponibiliad de la aplicacion, tambien vamos a definir la polita para el esalamiento, en este caso lo vamos a hacer mediante al consumo de cpu, si el consumo es mayor a 75 comenzara a escalar y aprovisionar el neuvo recurso.
+>En esta seccion tenemos la configuracion  del auto scaling group, para este debemos asociar un sg y vamos a defirnir las intancias con las cuales minimo trabajaremos y maximo tendremos, esto es para tener una alta disponibiliad de la aplicacion, tambien vamos a definir la polita para el esalamiento, en este caso lo vamos a hacer mediante al consumo de cpu, si el consumo es mayor a 75 comenzara a escalar y aprovisionar el neuvo recurso. Esta creacion esta asociada al pilar de fiabilidad, pilar de eficacia y rendimiento y pilar de optimizacion de costos del AWS Well-Architected-Framework.
 
 ``` 
   #Create the Auto Scaling group
@@ -713,7 +713,7 @@ Resources:
 ```
 
 > [!NOTE]
->En este segmento vamos a configurar las caracteristicas de nuestra base de datos, definimos caracteristicas del tipo de maquina que va a componerla el sg que va a tener la zona en la cual vamos a deplegarla y agregamos el subnetgroup a la base de datos en este caso la vamos a asociar para nuestras dos subnets privadas
+>En este segmento vamos a configurar las caracteristicas de nuestra base de datos, definimos caracteristicas del tipo de maquina que va a componerla el sg que va a tener la zona en la cual vamos a deplegarla y agregamos el subnetgroup a la base de datos en este caso la vamos a asociar para nuestras dos subnets privadas. esta creacion esta asociada al pilar de fiabilidad del AWS Well-Architected-Framework.
 
 ```
    ##Create the databases
@@ -811,7 +811,7 @@ git push codecommit::us-east-1://nombrerepositorio
 debemos crear un pipeline para que automaticamente se aplique los cambio cuando se hace un push a este repositorio, necesitamos 1 pipeline por cada archivo subido al repositorio, mediante este pipeline se realiza el CI/CD para nuestro proceso
 
 ## Seguimiento y Control
-Aplicando el pilar de la Excelencia Operativa del AWS Well-Architected Framework, implementamos CloudWatch para la supervision y control
+Aplicando el pilar de la Excelencia Operativa y optimizacion de costos del AWS Well-Architected Framework, implementamos CloudWatch para la supervision y control
 Describir la configuración del servicio de AWS Cloudwatch.
 
 Instalación del Agente  <br>
