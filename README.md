@@ -134,10 +134,10 @@ El documento PDF con el detalle del pricing esta disponible en el siguiente link
 
 
 ## Ejecucion
-para la creacion de los recursos que satisfagan los requerimientos y recursos que nos hemos planteado seguiremos los 6 pilares del AWS Well-Architected Framework <br> y lo vamos a divirdir en dos archivos, el primer archivo lo vamos a confgurar con la parametrizaciones de red, como lo es la vpc, las subredes, internet gateway, nat gateway,  route tables y routes, lo llamaremos como network.yaml
+Para la creacion de los recursos que satisfagan los requerimientos y recursos que nos hemos planteado seguiremos los 6 pilares del AWS Well-Architected Framework <br> y lo vamos a divirdir en dos archivos, el primer archivo lo vamos a confgurar con la parametrizaciones de red, como lo es la vpc, las subredes, internet gateway, nat gateway,  route tables y routes, lo llamaremos como network.yaml
 
 > [!IMPORTANT]
-> en esta seccion se va a explicar el contenido que los archivos pricipales para configurar nuestra arquitectura dentro de aws.
+> En esta seccion se va a explicar el contenido que los archivos pricipales para configurar nuestra arquitectura dentro de aws.
 <p>Primero tenemos la seccion de parametros.<p>
 En esta seccion vamos a asociar la vpc a una ip, esto lo hacemos dentro del bloque de parametros en el yaml.
 
@@ -154,7 +154,7 @@ Parameters:
     Default: 172.16.0.0/16
 ```
 > [!NOTE]
->Vamos a asociar las subnets a una ip por cada subnet, cada rango de ip debe ser diferente para que no se trasladen estas subredes.
+>Vamos asociar las subnets a una ip por cada subnet, cada rango de ip debe ser diferente para que no se traslapen estas subredes.
 ```
   PublicSubnetAIP:
     Type: String
@@ -182,7 +182,7 @@ Parameters:
 ```
 
 > [!NOTE]
->Luego tenemos la seccion de recusos, en la cual vamos a definir los recuros que vamos a crear y que son necesarios para el despliegue.
+>Luego tenemos la seccion de recusos, en la cual vamos a definir los recursos que vamos a crear y que son necesarios para el despliegue.
 Vamos a tener la creacion de la vpc, la cual se crea como un recurso de EC2,  la asociamos con el nombre que asociamos  en los recursos y asignamos la ip, esto nos permitira asignarle el rango de ip que se configuro anteriormente a la vpc que estamos creando.
 ```
 Resources:
@@ -224,7 +224,7 @@ Resources:
           Value: PublicSubnetB 
 ```
 > [!NOTE]
->Vamos a configurar el internet gateway, en la cual creamos el recurso le damos un nombre y tambien lo vamos ascoiar al internet gateway con la vpc.
+>Vamos a configurar el internet gateway, en la cual creamos el recurso le damos un nombre y tambien lo vamos asociar al internet gateway con la vpc.
 ```
   InternetGateway:
     Type: AWS::EC2::InternetGateway
